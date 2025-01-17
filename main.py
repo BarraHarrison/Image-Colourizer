@@ -20,3 +20,13 @@ points = points.transpose().reshape(2, 313, 1, 1)
 neural_network.getLayer(neural_network.getLayerId("class8_ab")).blobs = [points.astype(np.float32)]
 neural_network.getLayer(neural_network.getLayerId("conv8_313_rn")).blobs = [np.full([1, 313], 2.606, dtype="float32")]
 
+# Load the Black & White Image
+black_white_image = cv2.imread(image_path)
+normalized = black_white_image.astype("float32") / 255.0
+
+lab = cv2.cvtColor(normalized, cv2.COLOR_BGR2LAB)
+
+resized = cv2.resize(lab, (224, 224))
+light = cv2.split(resized)[0]
+light -= 50
+
