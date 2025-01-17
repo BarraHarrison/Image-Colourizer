@@ -33,3 +33,6 @@ light -= 50
 neural_network.setInput(cv2.dnn.blobFromImage(light))
 ab = neural_network.forward()[0, :, :, :].transpose((1,2,0))
 ab = cv2.resize(ab, black_white_image[1], black_white_image[0])
+
+light = cv2.split(lab)[0]
+colorized = np.concatenate((light[:,:,np.newaxis], ab), axis=2)
