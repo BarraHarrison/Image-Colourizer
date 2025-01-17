@@ -8,7 +8,7 @@ import cv2
 
 # Paths
 prototxt_path = 'models/colorization_deploy_v2.prototxt'
-model_path = 'models/dummy.caffemodel'
+model_path = 'models/colorization_release_v2.caffemodel'
 kernel_path = 'models/pts_in_hull.npy'
 image_path = 'images/image_one.jpg'
 
