@@ -10,7 +10,7 @@ import cv2
 prototxt_path = 'models/colorization_deploy_v2.prototxt'
 model_path = 'models/dummy.caffemodel'
 kernel_path = 'models/pts_in_hull.npy'
-image_path = 'image_one.jpg'
+image_path = 'images/image_one.jpg'
 
 neural_network = cv2.dnn.readNetFromCaffe(prototxt_path, model_path)
 points = np.load(kernel_path)
@@ -22,6 +22,11 @@ neural_network.getLayer(neural_network.getLayerId("conv8_313_rh")).blobs = [np.f
 
 # Load the Black & White Image
 black_white_image = cv2.imread(image_path)
+if black_white_image is None:
+    print(f"Error: Unable to load image from {image_path}")
+    exit(1)
+
+
 normalized = black_white_image.astype("float32") / 255.0
 
 lab = cv2.cvtColor(normalized, cv2.COLOR_BGR2LAB)
@@ -32,11 +37,11 @@ light -= 50
 
 neural_network.setInput(cv2.dnn.blobFromImage(light))
 ab = neural_network.forward()[0, :, :, :].transpose((1,2,0))
-ab = cv2.resize(ab, (black_white_image[1], black_white_image[0]))
+ab = cv2.resize(ab, (black_white_image.shape[1], black_white_image.shape[0]))
 
 light = cv2.split(lab)[0]
 colorized = np.concatenate((light[:,:,np.newaxis], ab), axis=2)
-colorized - cv2.cvtColor(colorized, cv2.COLOR_Lab2BGR)
+colorized = cv2.cvtColor(colorized, cv2.COLOR_Lab2BGR)
 colorized = (255.0 * colorized.astype("uint8"))
 
 cv2.imshow("B&W Image", black_white_image)
