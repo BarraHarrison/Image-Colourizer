@@ -18,7 +18,7 @@ points = np.load(kernel_path)
 points = points.transpose().reshape(2, 313, 1, 1)
 # LAB (lightness, A and B are colour values)
 neural_network.getLayer(neural_network.getLayerId("class8_ab")).blobs = [points.astype(np.float32)]
-neural_network.getLayer(neural_network.getLayerId("conv8_313_rn")).blobs = [np.full([1, 313], 2.606, dtype="float32")]
+neural_network.getLayer(neural_network.getLayerId("conv8_313_rh")).blobs = [np.full([1, 313], 2.606, dtype="float32")]
 
 # Load the Black & White Image
 black_white_image = cv2.imread(image_path)
