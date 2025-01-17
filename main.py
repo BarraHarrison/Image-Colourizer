@@ -36,3 +36,10 @@ ab = cv2.resize(ab, black_white_image[1], black_white_image[0])
 
 light = cv2.split(lab)[0]
 colorized = np.concatenate((light[:,:,np.newaxis], ab), axis=2)
+colorized - cv2.cvtColor(colorized, cv2.COLOR_Lab2BGR)
+colorized = (255.0 * colorized.astype("uint8"))
+
+cv2.imshow("B&W Image", black_white_image)
+cv2.imshow("Colourized Image", colorized)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
