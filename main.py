@@ -1,17 +1,19 @@
 # Colourizing Black & White Images using Python
-import numpy as np 
-import cv2
+import sys
+sys.path.append("/Users/barraharrison/Desktop/2025 Coding/Image-Colourizer/venv/lib/python3.9/site-packages")
+from deoldify import device
+from deoldify.visualize import get_image_colorizer
 import os 
-import requests
+
+# Set up the device
+set_fastai_device()
+
+colorizer = get_image_colorizer(artistic=True)
 
 # Paths
-prototxt_path = 'models/colorization_deploy_v2.prototxt'
-model_path = 'models/colorization_release_v2.caffemodel'
-kernel_path = 'models/pts_in_hull.npy'
-image_path = 'images/image_one.jpg'
+image_path = "images/image_one.jpeg"
+output_path = "images/colorized_image.jpg"
 
-neural_network = cv2.dnn.readNetFromCaffe(prototxt_path, model_path)
-points = np.load(kernel_path)
 
 points = points.transpose().reshape(2, 313, 1, 1)
 # LAB (lightness, A and B are colour values)
