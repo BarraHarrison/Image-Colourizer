@@ -11,9 +11,12 @@ DeOldify is a deep learning library used for image and video colourization.
 
 
 ## Switching to DeOldify
-
-
-## Features
+- DeOldify is an alternative and older library to OpenCV
+- There was issues with the fastai version and the DeOldify dependencies. For some reason, they were not compatible and the code did not run properly (Oh well!)
 
 
 ## Tools & Libraries
+- OpenCV
+- DeOldify
+- FastAI
+- PyTorch
